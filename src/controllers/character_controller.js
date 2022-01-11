@@ -1,17 +1,20 @@
 import BaseController from './base'
+import Character from '../models/character_model'
 
 export default class CharacterController extends BaseController {
   CharacterController () {}
 
-  index (req, res) {
+  async index (req, res) {
     return super.Success(res, '')
   }
 
-  create (req, res) {
-    return super.Success(res, '')
+  async create (req, res) {
+    const character = await Character.create(req.body)
+
+    return super.Success(res, character.dataValues)
   }
 
-  show (req, res) {
+  async show (req, res) {
     return super.Success(res, '')
   }
 }
