@@ -22,11 +22,5 @@ files.forEach((nameFile) => {
   models[formatKey] = require(`./${nameFile}`).default(sequelize, DataTypes)
 })
 
-Object.keys(models).forEach(key => {
-  if ('associate' in models[key]) {
-    models[key].associate(models)
-  }
-})
-
 export { sequelize, Op }
 export default models

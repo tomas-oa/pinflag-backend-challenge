@@ -27,10 +27,9 @@ export default class CharacterController extends BaseController {
     const characterData = req.body
 
     try {
-      await models.Character.create({
-        ...characterData
-      })
+      await models.Character.create(characterData)
     } catch (error) {
+      console.log(error)
       return super.ErrorBadRequest(res, {
         message: 'Please include all params'
       })
