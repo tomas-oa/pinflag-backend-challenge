@@ -25,7 +25,6 @@ export default class CharacterController extends BaseController {
 
   async create (req, res) {
     const characterData = req.body
-
     try {
       await models.Character.create(characterData)
     } catch (error) {

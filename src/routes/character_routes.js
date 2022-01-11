@@ -14,7 +14,7 @@ routes.post(
   new CharacterController().create
 )
 
-routes.get(
+routes.put(
   '/:name',
   new CharacterController().show
 )
