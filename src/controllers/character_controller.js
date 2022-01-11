@@ -16,7 +16,7 @@ export default class CharacterController extends BaseController {
         name,
         status,
         species,
-        homeName: location.name
+        origin: location.name
       }
     })
 
