@@ -14,4 +14,9 @@ routes.post(
   new CharacterController().create
 )
 
+routes.get(
+  '/:name',
+  new CharacterController().show
+)
+
 export default routes

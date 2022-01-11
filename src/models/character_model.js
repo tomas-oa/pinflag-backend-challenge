@@ -1,36 +1,38 @@
-import { Model, DataTypes } from 'sequelize'
+import Sequelize from 'sequelize'
 
-import sequelize from '../config/sequelize'
+export default (sequelize, DataTypes) => {
+  return Character.init(sequelize, DataTypes)
+}
 
-class Character extends Model {}
-
-Character.init({
-  id: {
-    autoIncrement: true,
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true
-  },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  status: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  species: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  origin: {
-    type: DataTypes.STRING,
-    allowNull: false
+class Character extends Sequelize.Model {
+  static init (sequelize, DataTypes) {
+    super.init({
+      id: {
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true
+      },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      status: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      species: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      origin: {
+        type: DataTypes.STRING,
+        allowNull: false
+      }
+    }, {
+      sequelize,
+      tableName: 'character',
+      schema: 'public'
+    })
   }
-}, {
-  sequelize,
-  tableName: 'character',
-  schema: 'public'
-})
-
-export default Character
+}

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Character from '../models/character_model'
+import models from '../models'
 import BaseController from './base'
 
 export default class CharacterController extends BaseController {
@@ -27,7 +27,7 @@ export default class CharacterController extends BaseController {
     const characterData = req.body
 
     try {
-      await Character.create({
+      await models.Character.create({
         ...characterData
       })
     } catch (error) {
@@ -42,7 +42,28 @@ export default class CharacterController extends BaseController {
     })
   }
 
-  show (req, res) {
-    return super.Success(res, '')
+  async show (req, res) {
+    const name = req.params.name.toLowerCase()
+
+    let character
+    try {
+      character = await models.Character.findOne({
+        where: {
+          name
+        }
+      })
+    } catch (error) {
+      super.InternalError(res, 'Internal error finding a character')
+    }
+    if (!character) {
+      character = await axios({
+        method: 'GET',
+        url: `https://rickandmortyapi.com/api/character/?name=${name}`
+      })
+
+      if (!character) return super.NotFound(res, 'Character not found')
+    }
+
+    return super.Success(res, character)
   }
 }

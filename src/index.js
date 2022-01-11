@@ -1,6 +1,8 @@
 import express from 'express'
 
 import routes from './routes'
+import './models'
+import './config/envs.config'
 
 const app = express()
 const port = process.env.PORT || 6000
