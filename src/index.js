@@ -1,6 +1,6 @@
 import express from 'express'
 
-import './config/envs.config'
+import './config/environment'
 import routes from './routes'
 import './models'
 
@@ -8,7 +8,7 @@ const app = express()
 const port = process.env.PORT || 5000
 
 app.use(express.json())
-app.use('/api', routes)
+app.use('/', routes)
 
 const startServer = () => {
   app.listen(port, () => {
