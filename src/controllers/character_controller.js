@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import Character from '../models/character_model'
+import Character from '../models/character_model'
 import BaseController from './base'
 
 export default class CharacterController extends BaseController {
