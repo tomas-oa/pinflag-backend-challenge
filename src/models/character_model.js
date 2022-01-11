@@ -13,7 +13,7 @@ Character.init({
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   status: {
     type: DataTypes.STRING,
