@@ -32,7 +32,10 @@ class Character extends Sequelize.Model {
     }, {
       sequelize,
       tableName: 'character',
-      schema: 'public'
+      schema: 'public',
+      timestamps: false
     })
+
+    return this
   }
 }
