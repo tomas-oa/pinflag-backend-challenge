@@ -1,11 +1,14 @@
 import express from 'express'
 
+import './config/envs.config'
 import routes from './routes'
+import './models'
 
 const app = express()
 const port = process.env.PORT || 5000
 
-app.use('/', routes)
+app.use(express.json())
+app.use('/api', routes)
 
 const startServer = () => {
   app.listen(port, () => {

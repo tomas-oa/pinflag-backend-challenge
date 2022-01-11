@@ -1,6 +1,10 @@
 import fs from 'fs'
 import { DataTypes, Op } from 'sequelize'
+<<<<<<< HEAD
 import sequelize from '../config/database'
+=======
+import sequelize from '../config/database.config'
+>>>>>>> 70f992c8346de3f2bd1501249447437e4f6855db
 
 // const files = fs.readdirSync(__dirname).filter((name) => name.includes('.model.') || name.includes('_model.'))
 const files = fs.readdirSync(__dirname).filter((name) => {
@@ -20,12 +24,6 @@ files.forEach((nameFile) => {
 
   // console.log(nameFile)
   models[formatKey] = require(`./${nameFile}`).default(sequelize, DataTypes)
-})
-
-Object.keys(models).forEach(key => {
-  if ('associate' in models[key]) {
-    models[key].associate(models)
-  }
 })
 
 export { sequelize, Op }
