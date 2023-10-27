@@ -18,7 +18,15 @@ export default class CharacterController extends BaseController {
   }
 
   async create (req, res) {
-    return super.Success(res, '')
+    const { name, status, species, origin } = req.body
+
+    if (!name) return super.ErrorBadRequest(res, 'Please provide a name.')
+    if (!status) return super.ErrorBadRequest(res, 'Please provide a status.')
+    if (!species) return super.ErrorBadRequest(res, 'Please provide a species.')
+    if (!origin) return super.ErrorBadRequest(res, 'Please provide an origin.')
+
+    const character = await models.Character.create({ name, status, species, origin })
+    return super.Success(res, character)
   }
 
   async show (req, res) {
