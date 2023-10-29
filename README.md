@@ -1,14 +1,35 @@
 # PINFLAG NODE JS CHALLENGE
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Documentation](#api-documentation)
+- [Assumptions](#assumptions)
+
 ## Installation
 
 ### 1. Clone the repository
 
+Via SSH
 ```bash
 git clone git@github.com:tomas-oa/pinflag-backend-challenge.git
 ```
 
-### 2. Create a .env file
+or
+
+Via HTTPS
+```bash
+git clone https://github.com/tomas-oa/pinflag-backend-challenge.git
+```
+
+### 2. Change directory
+
+```bash
+cd pinflag-backend-challenge
+```
+
+### 3. Create a .env file
 
 Use the .env.example file as a guide to create your own .env file
 ```bash
@@ -26,19 +47,19 @@ DATABASE_HOST=127.0.0.1
 DATABASE_PORT=5432
 ```
 
-### 3. Install dependencies
+### 4. Install dependencies
 
 ```bash
 npm install --force
 ```
 
-### 4. Create Postgres database using docker
+### 5. Create Postgres database using docker
 
 ```bash
 docker pull postgres && docker run --name pinflag_challenge_db -e POSTGRES_DB=pinflag_challenge -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
 ```
 
-### 5. Run migrations
+### 6. Run migrations
 
 ```bash
 npx sequelize-cli db:migrate
@@ -66,6 +87,11 @@ npm test
 
 ## API Documentation
 
-SwaggerUI documentation available at http://localhost:5000/docs
+Documentation available at http://localhost:5000/docs
 
 ## Assumptions
+
+- Dependencies are installed with `npm install --force` to avoid issues with peer dependencies.
+- The database is created using docker.
+- Environment variables are left in the repository to facilitate the review, but in a real project they should be private and never uploaded.
+- 
