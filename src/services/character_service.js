@@ -1,3 +1,4 @@
+import { Sequelize } from 'sequelize'
 import models from '../models'
 import axios from 'axios'
 
@@ -31,7 +32,13 @@ export default class CharacterService {
   }
 
   static async show ({ queryName }) {
-    let character = await models.Character.findOne({ where: { name: queryName } })
+    let character = await models.Character.findOne({
+      where: {
+        name: {
+          [Sequelize.Op.iLike]: queryName
+        }
+      }
+    })
 
     if (!character) {
       try {
