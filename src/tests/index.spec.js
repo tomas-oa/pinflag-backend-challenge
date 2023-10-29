@@ -1,5 +1,19 @@
-import app from '../index'
 import request from 'supertest'
+import app from '../index'
+
+const validDBCharacter = {
+  name: 'Miles Davis',
+  status: 'Dead',
+  species: 'Human',
+  origin: 'Earth'
+}
+
+const validAPICharacter = {
+  name: 'Morty Smith',
+  status: 'Alive',
+  species: 'Human',
+  origin: 'unknown'
+}
 
 describe('GET: /character/:n', () => {
   test('should return 400 if number of characters is not provided', async () => {
@@ -23,19 +37,12 @@ describe('GET: /character/:n', () => {
 })
 
 describe('POST: /character', () => {
-  const validCharacter = {
-    name: 'Rick',
-    status: 'Alive',
-    species: 'Human',
-    origin: 'Earth'
-  }
-
   test('should return 400 if there is a missing field', async () => {
     const invalidCharacters = [
-      { ...validCharacter, name: undefined },
-      { ...validCharacter, status: undefined },
-      { ...validCharacter, species: undefined },
-      { ...validCharacter, origin: undefined }
+      { ...validDBCharacter, name: undefined },
+      { ...validDBCharacter, status: undefined },
+      { ...validDBCharacter, species: undefined },
+      { ...validDBCharacter, origin: undefined }
     ]
 
     for (const character of invalidCharacters) {
@@ -45,11 +52,44 @@ describe('POST: /character', () => {
   })
 
   test('given a valid character, should return the character created', async () => {
-    const response = await request(app).post('/character').send(validCharacter)
+    const { name, status, species, origin } = validDBCharacter
+
+    const response = await request(app).post('/character').send(validDBCharacter)
     expect(response.statusCode).toBe(200)
-    expect(response.body).toHaveProperty('name', 'Rick')
-    expect(response.body).toHaveProperty('status', 'Alive')
-    expect(response.body).toHaveProperty('species', 'Human')
-    expect(response.body).toHaveProperty('origin', 'Earth')
+    expect(response.body).toHaveProperty('name', name)
+    expect(response.body).toHaveProperty('status', status)
+    expect(response.body).toHaveProperty('species', species)
+    expect(response.body).toHaveProperty('origin', origin)
+  })
+})
+
+describe('GET: /character?name=', () => {
+  test('should return 400 if there is no name query param', async () => {
+    const response = await request(app).get('/character?name=')
+    expect(response.statusCode).toBe(400)
+  })
+  test('given a valid api character name, should return the character', async () => {
+    const { name, status, species, origin } = validAPICharacter
+
+    const response = await request(app).get('/character?name=morty')
+    expect(response.statusCode).toBe(200)
+    expect(response.body).toHaveProperty('name', name)
+    expect(response.body).toHaveProperty('status', status)
+    expect(response.body).toHaveProperty('species', species)
+    expect(response.body).toHaveProperty('origin', origin)
+  })
+  test('given a valid db character name, should return the character', async () => {
+    const { name, status, species, origin } = validDBCharacter
+
+    const response = await request(app).get(`/character?name=${name}`)
+    expect(response.statusCode).toBe(200)
+    expect(response.body).toHaveProperty('name', name)
+    expect(response.body).toHaveProperty('status', status)
+    expect(response.body).toHaveProperty('species', species)
+    expect(response.body).toHaveProperty('origin', origin)
+  })
+  test('given an invalid name, should return 404', async () => {
+    const response = await request(app).get('/character?name=invalid')
+    expect(response.statusCode).toBe(404)
   })
 })
