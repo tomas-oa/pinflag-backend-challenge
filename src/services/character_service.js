@@ -17,6 +17,7 @@ export default class CharacterService {
       return data.map(({ name, status, species, origin }) => ({ name, status, species, origin: origin.name }))
     } catch (error) {
       console.error(error)
+      return null
     }
   }
 
@@ -25,6 +26,7 @@ export default class CharacterService {
       return await models.Character.create({ name, status, species, origin })
     } catch (error) {
       console.error(error)
+      return null
     }
   }
 
@@ -32,9 +34,13 @@ export default class CharacterService {
     let character = await models.Character.findOne({ where: { name: queryName } })
 
     if (!character) {
-      const { data } = await axios.get(`${BASE_URL}/character/?name=${queryName}`)
-      const { name, status, species, origin } = data.results[0]
-      character = { name, status, species, origin: origin.name }
+      try {
+        const { data } = await axios.get(`${BASE_URL}/character/?name=${queryName}`)
+        const { name, status, species, origin } = data.results[0]
+        character = { name, status, species, origin: origin.name }
+      } catch (error) {
+        return null
+      }
     }
 
     return character

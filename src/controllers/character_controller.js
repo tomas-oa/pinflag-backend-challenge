@@ -13,6 +13,8 @@ export default class CharacterController extends BaseController {
     if (isNaN(numberOfCharacters)) return super.ErrorBadRequest(res, 'Please a valid number of characters.')
 
     const characters = await CharacterService.getCharacters({ n: numberOfCharacters })
+    if (!characters) return super.InternalError(res, 'Something went wrong.')
+
     return super.Success(res, characters)
   }
 
@@ -24,6 +26,8 @@ export default class CharacterController extends BaseController {
     if (!origin) return super.ErrorBadRequest(res, 'Please provide an origin.')
 
     const character = await CharacterService.createCharacter({ name, status, species, origin })
+    if (!character) return super.InternalError(res, 'Something went wrong.')
+
     return super.Success(res, character)
   }
 
@@ -32,6 +36,8 @@ export default class CharacterController extends BaseController {
     if (!name) return super.ErrorBadRequest(res, 'Please provide a for the character that you want to search.')
 
     const character = await CharacterService.show({ queryName: name })
+    if (!character) return super.NotFound(res, 'Character not found.')
+
     return super.Success(res, character)
   }
 }
