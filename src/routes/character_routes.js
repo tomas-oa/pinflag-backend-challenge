@@ -7,7 +7,7 @@ const routes = app.Router()
 
 /**
  * @openapi
- * /character/:
+ * /character?name={name}:
  *  get:
  *    tags:
  *      - Character
