@@ -15,6 +15,17 @@ Use the .env.example file as a guide to create your own .env file
 cp .env.example .env
 ```
 
+Then paste the following values in the .env file
+```bash
+PORT=5000
+DATABASE_URI=postgres://postgres:docker@127.0.0.1:5432/pinflag_challenge
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=docker
+DATABASE_NAME=pinflag_challenge
+DATABASE_HOST=127.0.0.1
+DATABASE_PORT=5432
+```
+
 ### 3. Run docker-compose
 
 Give excecution permissions to the script
@@ -55,19 +66,7 @@ docker-compose exec app npm test
 
 ## API Documentation
 
-**The default port is 5000**
-
-### SwaggerUI documentation
-
-#### The API documentation is available at http://localhost:5000/docs
-
-### Character endpoints
-
-- #### GET /characters/{number_of_characters}
-
-- #### GET /characters?name={name}
-
-- #### POST /characters
+SwaggerUI documentation available at http://localhost:5000/docs
 
 
 ## Assumptions
