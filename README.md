@@ -15,7 +15,7 @@ Use the .env.example file as a guide to create your own .env file
 cp .env.example .env
 ```
 
-Then paste the following values in the .env file
+Then paste the following values in the .env file (Usually the environment variables should be private and NOT uploaded. But since this a challenge I'm leaving them here to facilitate the review)
 ```bash
 PORT=5000
 DATABASE_URI=postgres://postgres:docker@127.0.0.1:5432/pinflag_challenge
@@ -26,22 +26,22 @@ DATABASE_HOST=127.0.0.1
 DATABASE_PORT=5432
 ```
 
-### 3. Run docker-compose
+### 3. Install dependencies
 
-Give excecution permissions to the script
 ```bash
-chmod +x ./run-compose.sh
+npm install --force
 ```
 
-Run the script
+### 4. Create Postgres database using docker
+
 ```bash
-./run-compose.sh
+docker pull postgres && docker run --name pinflag_challenge_db -e POSTGRES_DB=pinflag_challenge -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
 ```
 
-### 4. Run migrations
+### 5. Run migrations
 
 ```bash
-docker-compose exec app npx sequelize-cli db:migrate
+npx sequelize-cli db:migrate
 ```
 
 ## Usage
@@ -49,24 +49,23 @@ docker-compose exec app npx sequelize-cli db:migrate
 ### Start the server
 
 ```bash
-docker-compose exec app npm start
+npm start
 ```
 
 ### Run on development mode
 
 ```bash
-docker-compose exec app npm run dev
+npm run dev
 ```
 
 ### Run tests
 
 ```bash
-docker-compose exec app npm test
+npm test
 ```
 
 ## API Documentation
 
 SwaggerUI documentation available at http://localhost:5000/docs
-
 
 ## Assumptions
