@@ -8,7 +8,8 @@
     "build": "babel src --ignore src/tests --out-dir build --copy-files --no-copy-ignored --source-maps inline",
     "start": "npm run lint && npm run build && node ./build/index.js",
     "dev": "nodemon --exec babel-node src/index.js",
-    "test": "jest --silent --runInBand --detectOpenHandles --forceExit"
+    "test": "jest --forceExit",
+    "test:watch": "jest --watch --runInBand --forceExit"
   },
   "repository": {
     "type": "git",
