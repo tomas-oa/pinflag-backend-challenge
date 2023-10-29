@@ -10,6 +10,7 @@ const port = process.env.PORT || 5000
 
 app.use(express.json())
 app.use('/', routes)
+app.all('*', (_, res) => res.status(404).json({ message: 'Route not defined' }))
 
 const startServer = () => {
   app.listen(port, () => {
