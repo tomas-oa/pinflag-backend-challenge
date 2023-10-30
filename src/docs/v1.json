@@ -17,7 +17,8 @@
         "tags": [
           "Characters"
         ],
-        "description": "",
+        "description": "Creates a character in the database",
+        "summary": "Create a character",
         "parameters": [
           {
             "name": "user",
@@ -91,6 +92,8 @@
         "tags": [
           "Characters"
         ],
+        "summary": "Retrieve a list of characters",
+        "description": "Retrieves a list of characters from the Rick and Morty API based on the number provided.",
         "responses": {
             "200": {
               "description": "Returns a list of characters"
