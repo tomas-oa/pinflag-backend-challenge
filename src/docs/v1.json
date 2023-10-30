@@ -1,0 +1,136 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Pinflag Challenge"
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Characters"
+    }
+  ],
+  "paths": {
+    "/character": {
+      "post": {
+        "tags": [
+          "Characters"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Character"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Character created"
+          },
+          "400": {
+            "description": "Missing required fields"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/character?name={name}": {
+      "get": {
+        "tags": [
+          "Characters"
+        ],
+        "summary": "Find a character by name",
+        "description": "Retrieves a character from the database or from the Rick and Morty API if it's not found in the database",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Name of character to find",
+            "type": "string"
+          }
+        ],
+        "responses": {
+            "200": {
+              "description": "Character found"
+            },
+            "400": {
+              "description": "No name provided"
+            },
+            "404": {
+              "description": "Character not found in the database or int the Rick and Morty API"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+        }
+      }
+    },
+    "/character/{number_of_characters}": {
+      "parameters": [
+        {
+          "name": "number_of_characters",
+          "in": "path",
+          "required": true,
+          "description": "Number of characters to return",
+          "type": "integer",
+          "minimum": 1
+        }
+      ],
+      "get": {
+        "tags": [
+          "Characters"
+        ],
+        "responses": {
+            "200": {
+              "description": "Returns a list of characters"
+            },
+            "400": {
+              "description": "Missing number of characters or invalid number"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Character": {
+      "required": [
+        "name",
+        "status",
+        "species",
+        "origin"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Guts"
+        },
+        "status": {
+          "type": "string",
+          "example": "Alive"
+        },
+        "species": {
+          "type": "string",
+          "example": "Human"
+        },
+        "origin": {
+          "type": "string",
+          "example": "Midland"
+        }
+      }
+    }
+  }
+}
