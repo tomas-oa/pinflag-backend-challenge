@@ -35,7 +35,7 @@ Use the .env.example file as a guide to create your own .env file
 cp .env.example .env
 ```
 
-Then paste the following values in the .env file (Usually the environment variables should be private and NOT uploaded. But since this a challenge I'm leaving them here to facilitate the review)
+Then paste the following values in the .env file **Usually the environment variables should be private and NOT uploaded. But since this a challenge I'm leaving them here to facilitate the review**
 ```bash
 PORT=5000
 DATABASE_URI=postgres://postgres:docker@127.0.0.1:5432/pinflag_challenge
@@ -48,6 +48,7 @@ DATABASE_PORT=5432
 
 ### 4. Install dependencies
 
+Use ```--force``` to avoid issues with peer dependencies.
 ```bash
 npm install --force
 ```
@@ -93,3 +94,4 @@ Documentation available at http://localhost:5000/docs
 - Dependencies are installed with `npm install --force` to avoid issues with peer dependencies.
 - The database is created using docker.
 - Environment variables are left in the repository to facilitate the review, but in a real project they should be private and never uploaded.
+- Search character by name ```/character?name=``` is case insensitive
