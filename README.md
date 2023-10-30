@@ -1,11 +1,10 @@
 # PINFLAG NODE JS CHALLENGE
 
 ## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [API Documentation](#api-documentation)
-- [Assumptions](#assumptions)
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [API Documentation](#api-documentation)
+4. [Assumptions](#assumptions)
 
 ## Installation
 
@@ -94,4 +93,3 @@ Documentation available at http://localhost:5000/docs
 - Dependencies are installed with `npm install --force` to avoid issues with peer dependencies.
 - The database is created using docker.
 - Environment variables are left in the repository to facilitate the review, but in a real project they should be private and never uploaded.
-- 
